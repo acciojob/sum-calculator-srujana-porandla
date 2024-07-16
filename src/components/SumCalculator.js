@@ -46,7 +46,7 @@ const SumCalculator = () => {
         />
         <button type="submit" style={{ marginLeft: '10px', padding: '5px 10px', fontSize: '16px' }}>Add</button>
       </form>
-      <h2>Sum: {sum}</h2>
+      <p>Sum: {sum}</p>
     </div>
   );
 };
