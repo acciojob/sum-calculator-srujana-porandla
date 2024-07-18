@@ -10,11 +10,16 @@ const SumCalculator = () => {
     setSum(total);
   }, [numbers]);
 
+  
+
   const handleInputChange = (e) => {
-    const parsedValue = parseInt(e.target.value, 10);
+    const value = e.target.value;
+    setInputValue(value);
+
+    const parsedValue = parseInt(value, 10);
     if (!isNaN(parsedValue)) {
       setNumbers((prevNumbers) => [...prevNumbers, parsedValue]);
-      e.target.value = ''; 
+      setInputValue(''); 
     }
   };
 
@@ -23,6 +28,7 @@ const SumCalculator = () => {
       <h1>Sum Calculator</h1>
       <input
         type="number"
+        value={inputValue}
         onChange={handleInputChange}
         placeholder="Enter a number"
         style={{ padding: '5px', fontSize: '16px', width: '150px' }}
