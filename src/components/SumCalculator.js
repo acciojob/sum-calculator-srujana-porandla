@@ -1,41 +1,40 @@
 import React, { useState, useEffect } from 'react';
 
 const SumCalculator = () => {
+  // State to store the array of numbers
   const [numbers, setNumbers] = useState([]);
+  // State to store the sum of numbers
   const [sum, setSum] = useState(0);
-  const [inputValue, setInputValue] = useState('');
 
-  useEffect(() => {
-    // Use setTimeout with a delay of 0 to ensure asynchronous sum calculation
-    setTimeout(() => {
-      const total = numbers.reduce((acc, num) => acc + num, 0);
-      setSum(total);
-    }, 0);
-  }, [numbers]);
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleAddNumber = () => {
-    const parsedValue = parseInt(inputValue, 10);
-    if (!isNaN(parsedValue)) {
-      setNumbers((prevNumbers) => [...prevNumbers, parsedValue]);
-      setInputValue(''); // Clear the input field after adding the number
+  // Function to handle user input
+  const handleInputChange = (event) => {
+    const value = event.target.value;
+    if (value) {
+      const number = parseInt(value, 10);
+      // Add the new number to the array of numbers
+      setNumbers((prevNumbers) => [...prevNumbers, number]);
     }
   };
 
+  // Effect to calculate the sum of numbers whenever the numbers array changes
+  useEffect(() => {
+    const calculateSum = () => {
+      // Calculate the sum asynchronously
+      const newSum = numbers.reduce((acc, number) => acc + number, 0);
+      setSum(newSum);
+    };
+
+    calculateSum();
+  }, [numbers]);
+
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div>
       <h1>Sum Calculator</h1>
       <input
         type="number"
-        value={inputValue}
-        onChange={handleInputChange}
         placeholder="Enter a number"
-        style={{ padding: '5px', fontSize: '16px', width: '150px' }}
+        onClick={handleInputChange}
       />
-      <button onClick={handleAddNumber} style={{ marginLeft: '10px', padding: '5px 10px', fontSize: '16px' }}>Add</button>
       <p>Sum: {sum}</p>
     </div>
   );
