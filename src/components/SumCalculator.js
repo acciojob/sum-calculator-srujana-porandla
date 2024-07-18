@@ -6,20 +6,22 @@ const SumCalculator = () => {
   const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
-    const total = numbers.reduce((acc, num) => acc + num, 0);
-    setSum(total);
+    // Use setTimeout with a delay of 0 to ensure asynchronous sum calculation
+    setTimeout(() => {
+      const total = numbers.reduce((acc, num) => acc + num, 0);
+      setSum(total);
+    }, 0);
   }, [numbers]);
 
-  
-
   const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
+    setInputValue(e.target.value);
+  };
 
-    const parsedValue = parseInt(value, 10);
+  const handleAddNumber = () => {
+    const parsedValue = parseInt(inputValue, 10);
     if (!isNaN(parsedValue)) {
       setNumbers((prevNumbers) => [...prevNumbers, parsedValue]);
-      setInputValue(''); 
+      setInputValue(''); // Clear the input field after adding the number
     }
   };
 
@@ -33,6 +35,7 @@ const SumCalculator = () => {
         placeholder="Enter a number"
         style={{ padding: '5px', fontSize: '16px', width: '150px' }}
       />
+      <button onClick={handleAddNumber} style={{ marginLeft: '10px', padding: '5px 10px', fontSize: '16px' }}>Add</button>
       <p>Sum: {sum}</p>
     </div>
   );
