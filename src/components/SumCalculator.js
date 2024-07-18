@@ -21,9 +21,15 @@ const SumCalculator = () => {
   }
 
   useEffect(() => {
-    const newSum = numbers.reduce((acc, number) => acc + number, 0);
-    setSum(newSum);
-  }, [numbers]);
+    const calculateS=()=>{
+      const newSum = numbers.reduce((acc, number) => acc + number, 0);
+      setSum(newSum);
+     };
+     calculateS();
+    }
+     ,[numbers]);
+    
+    
 
   return (
     <div>
