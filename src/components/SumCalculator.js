@@ -1,30 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
 const SumCalculator = () => {
-  // State to store the array of numbers
+  
   const [numbers, setNumbers] = useState([]);
-  // State to store the sum of numbers
+  const [input, setInput] = useState("");
   const [sum, setSum] = useState(0);
 
-  // Function to handle user input
   const handleInputChange = (event) => {
-    const value = event.target.value;
-    if (value) {
-      const number = parseInt(value, 10);
-      // Add the new number to the array of numbers
-      setNumbers((prevNumbers) => [...prevNumbers, number]);
-    }
+    setInput(event.target.value);
   };
 
-  // Effect to calculate the sum of numbers whenever the numbers array changes
-  useEffect(() => {
-    const calculateSum = () => {
-      // Calculate the sum asynchronously
-      const newSum = numbers.reduce((acc, number) => acc + number, 0);
-      setSum(newSum);
-    };
+  const handleInputSubmit = () => {
+    const number = parseInt(input, 10);
+      
+    if (!isNaN(number)) {
+      setNumbers((prevNumbers) => [...prevNumbers, number]);
+    }
+    
+    setInput("");
+  }
 
-    calculateSum();
+  useEffect(() => {
+    const newSum = numbers.reduce((acc, number) => acc + number, 0);
+    setSum(newSum);
   }, [numbers]);
 
   return (
@@ -32,9 +30,11 @@ const SumCalculator = () => {
       <h1>Sum Calculator</h1>
       <input
         type="number"
+        value={input}
         placeholder="Enter a number"
-        onClick={handleInputChange}
+        onChange={handleInputChange}
       />
+      <button onClick={handleInputSubmit}>Add Number</button>
       <p>Sum: {sum}</p>
     </div>
   );
