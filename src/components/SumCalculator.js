@@ -27,7 +27,7 @@ const SumCalculator = () => {
         placeholder="Enter a number"
         style={{ padding: '5px', fontSize: '16px', width: '150px' }}
       />
-      <h2>Sum: {sum}</h2>
+      <p>Sum: {sum}</p>
     </div>
   );
 };
